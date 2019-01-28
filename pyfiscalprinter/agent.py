@@ -17,12 +17,12 @@ __copyright__ = "Copyright (C) 2014 Mariano Reingart"
 __license__ = "GPL 3.0"
 __version__ = "1.00a"
 
-from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, HTTPServer
 import cgi
 import time
 import os
 
-from controller import PyFiscalPrinter
+from .controller import PyFiscalPrinter
 
 # ejemplo para http://localhost:8000 :
 
@@ -72,7 +72,7 @@ class Handler(BaseHTTPRequestHandler):
                 # obtengo la funcion a llamar
                 fn = getattr(self.server.controlador, method)
                 callback = qs['callback'].pop()
-                kwargs = dict([(k, v[0]) for k, v in qs.items() if v])
+                kwargs = dict([(k, v[0]) for k, v in list(qs.items()) if v])
                 # ejecuto el metodo del controlador
                 ret = fn(**kwargs)
                 # reviso el valor devuelto (limpio si es excepcion):
@@ -89,7 +89,7 @@ class Handler(BaseHTTPRequestHandler):
                     # devuelvo JS que llame al callback en el navegador:
                     content = """%s(%s);""" % (callback, repr(ret))
                 content_type = "application/javascript"
-                print content
+                print(content)
             else:
                 # prueba simple:
                 content_type = "application/javascript"

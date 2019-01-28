@@ -14,7 +14,7 @@ class EpsonFiscalDriverService(win32serviceutil.ServiceFramework):
     def SvcDoRun(self):
         import servicemanager
 
-	from driver import socketServer
+	from .driver import socketServer
 
         servicemanager.LogInfoMsg("epsonFiscalDriver - Iniciando Servidor")
 	self.server = socketServer("Hasar", "", 12345, "COM1", 9600, 60, True)

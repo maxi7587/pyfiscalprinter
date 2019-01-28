@@ -3,12 +3,12 @@ import serial
 import random
 import time
 import sys
-import SocketServer
+import socketserver
 import socket
 import traceback
 
 def debugEnabled( *args ):
-    print >>sys.stderr, " ".join( map(str, args) )
+    print(" ".join( map(str, args) ), file=sys.stderr)
 
 def debugDisabled( *args ):
     pass
@@ -76,7 +76,7 @@ class EpsonFiscalDriver:
             self._sequenceNumber = 0x20
 
     def _write( self, s ):
-        if isinstance(s, unicode):
+        if isinstance(s, str):
             s = s.encode("latin1")
         debug( "_write", ", ".join( [ "%x" % ord(c) for c in s ] ) )
         self._serialPort.write( s )
@@ -127,13 +127,13 @@ class EpsonFiscalDriver:
         x = int( printerStatus, 16 )
         for value, message in self.printerStatusErrors:
             if (value & x) == value:
-                raise PrinterStatusError, message
+                raise PrinterStatusError(message)
 
     def _parseFiscalStatus( self, fiscalStatus ):
         x = int( fiscalStatus, 16 )
         for value, message in self.fiscalStatusErrors:
             if (value & x) == value:
-                raise FiscalStatusError, message
+                raise FiscalStatusError(message)
 
     def _sendMessage( self, message ):
         # Envía el mensaje
@@ -143,7 +143,7 @@ class EpsonFiscalDriver:
         retries = 0
         while 1:
             if time.time() > timeout:
-                raise ComunicationError, "Expiró el tiempo de espera para una respuesta de la impresora. Revise la conexión."
+                raise ComunicationError("Expiró el tiempo de espera para una respuesta de la impresora. Revise la conexión.")
             c = self._read(1)
             if len(c) == 0:
                 continue
@@ -153,7 +153,7 @@ class EpsonFiscalDriver:
                 continue
             if ord(c) == 0x15: # NAK
                 if retries > self.RETRIES:
-                    raise ComunicationError, "Falló el envío del comando a la impresora luego de varios reintentos"
+                    raise ComunicationError("Falló el envío del comando a la impresora luego de varios reintentos")
                 # Reenvío el mensaje
                 self._write( message )
                 timeout = time.time() + self.WAIT_TIME
@@ -168,7 +168,7 @@ class EpsonFiscalDriver:
                         noreplyCounter += 1
                         time.sleep(self.WAIT_CHAR_TIME)
                         if noreplyCounter > self.NO_REPLY_TRIES:
-                            raise ComunicationError, "Fallo de comunicación mientras se recibía la respuesta de la impresora."
+                            raise ComunicationError("Fallo de comunicación mientras se recibía la respuesta de la impresora.")
                     else:
                         noreplyCounter = 0
                         reply += c
@@ -179,7 +179,7 @@ class EpsonFiscalDriver:
                     timeout = time.time() + self.WAIT_TIME
                     retries += 1
                     if retries > self.RETRIES:
-                        raise ComunicationError, "Fallo de comunicación, demasiados paquetes inválidos (bad bcc)."
+                        raise ComunicationError("Fallo de comunicación, demasiados paquetes inválidos (bad bcc).")
                     continue
                 elif reply[1] != chr( self._sequenceNumber ): # Los número de seq no coinciden
                     # Reenvío el mensaje
@@ -187,7 +187,7 @@ class EpsonFiscalDriver:
                     timeout = time.time() + self.WAIT_TIME
                     retries +=1
                     if retries > self.RETRIES:
-                        raise ComunicationError, "Fallo de comunicación, demasiados paquetes inválidos (mal sequence_number)."
+                        raise ComunicationError("Fallo de comunicación, demasiados paquetes inválidos (mal sequence_number).")
                     continue
                 else:
                     # Respuesta OK
@@ -242,12 +242,12 @@ class HasarFiscalDriver( EpsonFiscalDriver ):
 
     def _sendAndWaitAck( self, message, count = 0 ):
         if count > 10:
-            raise ComunicationError, "Demasiados NAK desde la impresora. Revise la conexión."
+            raise ComunicationError("Demasiados NAK desde la impresora. Revise la conexión.")
         self._write( message )
         timeout = time.time() + self.WAIT_TIME
         while 1:
             if time.time() > timeout:
-                raise ComunicationError, "Expiró el tiempo de espera para una respuesta de la impresora. Revise la conexión."
+                raise ComunicationError("Expiró el tiempo de espera para una respuesta de la impresora. Revise la conexión.")
             c = self._read(1)
             if len(c) == 0:
                 continue
@@ -264,7 +264,7 @@ class HasarFiscalDriver( EpsonFiscalDriver ):
         retries = 0
         while 1:
             if time.time() > timeout:
-                raise ComunicationError, "Expiró el tiempo de espera para una respuesta de la impresora. Revise la conexión."
+                raise ComunicationError("Expiró el tiempo de espera para una respuesta de la impresora. Revise la conexión.")
             c = self._read(1)
             if len(c) == 0:
                 continue
@@ -289,7 +289,7 @@ class HasarFiscalDriver( EpsonFiscalDriver ):
                         noreplyCounter += 1
                         time.sleep(self.WAIT_CHAR_TIME)
                         if noreplyCounter > self.NO_REPLY_TRIES:
-                            raise ComunicationError, "Fallo de comunicación mientras se recibía la respuesta de la impresora."
+                            raise ComunicationError("Fallo de comunicación mientras se recibía la respuesta de la impresora.")
                     else:
                         noreplyCounter = 0
                         reply += c
@@ -300,7 +300,7 @@ class HasarFiscalDriver( EpsonFiscalDriver ):
                     timeout = time.time() + self.WAIT_TIME
                     retries += 1
                     if retries > self.RETRIES:
-                        raise ComunicationError, "Fallo de comunicación, demasiados paquetes inválidos (bad bcc)."
+                        raise ComunicationError("Fallo de comunicación, demasiados paquetes inválidos (bad bcc).")
                     continue
                 elif reply[1] != chr( self._sequenceNumber ): # Los número de seq no coinciden
                     # Reenvío el mensaje
@@ -309,7 +309,7 @@ class HasarFiscalDriver( EpsonFiscalDriver ):
                     timeout = time.time() + self.WAIT_TIME
                     retries +=1
                     if retries > self.RETRIES:
-                        raise ComunicationError, "Fallo de comunicación, demasiados paquetes inválidos (bad sequenceNumber)."
+                        raise ComunicationError("Fallo de comunicación, demasiados paquetes inválidos (bad sequenceNumber).")
                     continue
                 else:
                     # Respuesta OK
@@ -322,7 +322,7 @@ class DummyDriver:
         pass
 
     def sendCommand(self, commandNumber, parameters, skipStatusErrors):
-        print commandNumber, parameters, skipStatusErrors
+        print(commandNumber, parameters, skipStatusErrors)
         number = random.randint(0, 99999999)
         return ["00", "00"] + [str(number)] * 11
 
@@ -340,7 +340,7 @@ class EpsonFiscalDriverProxy:
         self.socket.settimeout( self.timeout )
         try:
             self.socket.connect( (self.host, self.port ) )
-        except socket.error, e:
+        except socket.error as e:
             raise ProxyError( "Error conectandose a la impresora remota: %s." % str(e) )
         self.socketFile = self.socket.makefile( "rw", 1 )
 
@@ -364,7 +364,7 @@ class EpsonFiscalDriverProxy:
             return eval( reply[7:] )
         elif reply[:5] == "ERROR":
             errorNum = int(reply[7:9])
-            errorClass = filter( lambda x: x.errorNumber == errorNum, ServerErrors )
+            errorClass = [x for x in ServerErrors if x.errorNumber == errorNum]
             if errorClass:
                 raise errorClass[0]( reply[10:] )
             else:
@@ -407,25 +407,25 @@ def runServer( printerType, fileIn, fileOut, deviceFile, speed = 9600 ):
         parameters = eval(commandLine[12:].strip())
         try:
             reply = p.sendCommand( commandNumber, parameters, skipStatusErrors )
-        except PrinterException, e:
+        except PrinterException as e:
             fileOut.write( "ERROR: %02d %s\n" % (e.errorNumber, str(e)) )
-        except Exception, e:
+        except Exception as e:
             fileOut.write( "ERROR: %02d %s\n" % (1, str(e)) )
         else:
             fileOut.write( "REPLY: %s\n" % reply )
         fileOut.flush()
     p.close()
 
-class ReusableTCPServer(SocketServer.TCPServer):
+class ReusableTCPServer(socketserver.TCPServer):
     def server_bind(self):
         """Override server_bind to set socket options."""
         self.socket.setsockopt(socket.SOL_SOCKET,
             socket.SO_REUSEADDR, 1)
-        return SocketServer.TCPServer.server_bind(self)
+        return socketserver.TCPServer.server_bind(self)
 
 
 def socketServer(printerType, host, port, deviceFile, speed, timeout = 60, returnServer=False):
-    class Handler( SocketServer.StreamRequestHandler ):
+    class Handler( socketserver.StreamRequestHandler ):
         rbufsize = 1
         wbufsize = 1
         def handle( self ):
