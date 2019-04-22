@@ -170,8 +170,12 @@ class EpsonPrinter(PrinterInterface):
 
     def _openBillCreditTicket(self, type, name, address, doc, docType, ivaType, isCreditNote,
             reference=None):
-        if not doc or [x for x in doc or "" if x not in string.digits + "-."] or not \
-                docType in self.docTypeNames:
+        # if not doc or [x for x in doc or "" if x not in string.digits + "-."] or not \
+        #         docType in self.docTypeNames:
+        print('doc ---------->', doc)
+        print('docType ---------->', docType)
+        print('string.digits ---------->', string.digits)
+        if not doc or [x for x in doc or "" if x not in string.digits + "-."] or not docType in self.docTypeNames:
             doc, docType = "", ""
         else:
             doc = doc.replace("-", "").replace(".", "")
