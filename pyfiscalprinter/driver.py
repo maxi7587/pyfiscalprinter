@@ -111,6 +111,12 @@ class EpsonFiscalDriver:
         print('message in sendCommand ------------>', message)
         if fields:
             message += chr(0x1c)
+        print('fields ---------->', fields)
+        print('fields type ---------->', type(fields))
+        print('message ---------->', message)
+        print('message type ---------->', type(message))
+        print('0x1c type', type(0x1c))
+        print('0x1c chr', chr(0x1c))
         message += chr(0x1c).join( fields )
         message += chr(0x03)
         checkSum = sum( [ord(x) for x in message ] )
