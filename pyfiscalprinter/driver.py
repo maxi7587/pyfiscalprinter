@@ -128,6 +128,8 @@ class EpsonFiscalDriver:
         fields = r.split( chr(28) )
         printerStatus = fields[0]
         fiscalStatus = fields[1]
+        print('_parseReply printerStatus', printerStatus)
+        print('_parseReply fiscalStatus', fiscalStatus)
         if not skipStatusErrors:
             self._parsePrinterStatus( printerStatus )
             self._parseFiscalStatus( fiscalStatus )
