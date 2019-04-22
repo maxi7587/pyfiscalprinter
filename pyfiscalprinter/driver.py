@@ -191,9 +191,9 @@ class EpsonFiscalDriver:
                 noreplyCounter = 0
                 # while c != chr(0x03): # ETX (Fin de texto)
                 while ord(c) != 0x03: # ETX (Fin de texto)
-                    print('-----------------------------------------')
-                    print('c != chr(0x03), incrementing timeout')
-                    print('-----------------------------------------')
+                    # print('-----------------------------------------')
+                    # print('c != chr(0x03), incrementing timeout')
+                    # print('-----------------------------------------')
                     c = self._read(1)
                     if not c:
                         noreplyCounter += 1
