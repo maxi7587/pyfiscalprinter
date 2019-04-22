@@ -120,7 +120,8 @@ class EpsonFiscalDriver:
         print('0x1c type', type(0x1c))
         print('0x1c chr', chr(0x1c))
         fields_str_list = [ field if isinstance(field, str) else field.decode() for field in fields ]
-        message += chr(0x1c).join( fields )
+        # message += chr(0x1c).join( fields )
+        message += chr(0x1c).join( fields_str_list )
         message += chr(0x03)
         checkSum = sum( [ord(x) for x in message ] )
         print('after checkSum')
