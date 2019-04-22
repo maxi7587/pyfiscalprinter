@@ -190,6 +190,9 @@ class EpsonFiscalDriver:
                         reply += c
                 bcc = self._read(4) # Leo BCC
                 if not self._checkReplyBCC( reply, bcc ):
+                    print('-----------------------------------------')
+                    print('not _checkReplyBCC, incrementing timeout')
+                    print('-----------------------------------------')
                     # Mando un NAK y espero la respuesta de nuevo.
                     self._write( chr(0x15) )
                     timeout = time.time() + self.WAIT_TIME
