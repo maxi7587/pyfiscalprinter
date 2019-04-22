@@ -30,7 +30,7 @@ class FileDriver:
 
 def formatText(text):
     asciiText = unicodedata.normalize('NFKD', str(text)).encode('ASCII', 'ignore')
-    asciiText = asciiText.replace("\t", " ").replace("\n", " ").replace("\r", " ")
+    asciiText = asciiText.replace(b"\t", b" ").replace(b"\n", b" ").replace(b"\r", b" ")
     return asciiText
 
 
