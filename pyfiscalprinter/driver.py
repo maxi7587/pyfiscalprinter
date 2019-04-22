@@ -244,8 +244,10 @@ class EpsonFiscalDriver:
         return reply
 
     def _checkReplyBCC( self, reply, bcc ):
-        debug( "reply", reply, [ord(x) for x in reply] )
-        checkSum = sum( [ord(x) for x in reply ] )
+        # debug( "reply", reply, [ord(x) for x in reply] )
+        # checkSum = sum( [ord(x) for x in reply ] )
+        debug( "reply", reply, [x for x in reply] )
+        checkSum = sum( [x for x in reply ] )
         debug( "checkSum", checkSum )
         checkSumHexa = ("0000" + hex(checkSum)[2:])[-4:].upper()
         debug( "checkSumHexa", checkSumHexa )
