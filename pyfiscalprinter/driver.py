@@ -209,6 +209,9 @@ class EpsonFiscalDriver:
                 print('EXIT WHILE LOOP (ORD(c) != 0x03)')
                 print('--------------------------------------')
                 bcc = self._read(4) # Leo BCC
+                print('--------------------------------------')
+                print('read BCC', bcc)
+                print('--------------------------------------')
                 if not self._checkReplyBCC( reply, bcc ):
                     print('-----------------------------------------')
                     print('not _checkReplyBCC, incrementing timeout')
