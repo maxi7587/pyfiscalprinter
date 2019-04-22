@@ -200,8 +200,12 @@ class EpsonFiscalDriver:
                         raise ComunicationError("Fallo de comunicación, demasiados paquetes inválidos (mal sequence_number).")
                     continue
                 else:
+                    print('-----------------------------------------')
+                    print('should exit while loop')
+                    print('-----------------------------------------')
                     # Respuesta OK
                     break
+        print('will return reply ------------>', reply)
         return reply
 
     def _checkReplyBCC( self, reply, bcc ):
