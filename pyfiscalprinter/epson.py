@@ -174,9 +174,9 @@ class EpsonPrinter(PrinterInterface):
         #         docType in self.docTypeNames:
         print('doc ---------->', doc)
         print('docType ---------->', docType)
-        print('docType type ---------->', type(docType))
+        print('docType type str ---------->', isinstance(docType, str))
+        print('docType type int---------->', isinstance(docType, int))
         print('string.digits ---------->', string.digits)
-        print('string.digits type ---------->', type(string.digits))
         if not doc or [x for x in doc or "" if x not in string.digits + "-."] or not docType in self.docTypeNames:
             doc, docType = "", ""
         else:
