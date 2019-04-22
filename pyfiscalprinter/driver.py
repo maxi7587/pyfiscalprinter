@@ -159,6 +159,9 @@ class EpsonFiscalDriver:
             print('C IN _sendMessage ------->', c)
             print('ORD C IN _sendMessage ------->', ord(c))
             if len(c) == 0:
+                print('-----------------------------------------')
+                print('len c == 0, CONTINUE')
+                print('-----------------------------------------')
                 continue
             if ord(c) in (0x12, 0x14): # DC2 o DC4
                 print('-----------------------------------------')
