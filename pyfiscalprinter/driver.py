@@ -78,15 +78,15 @@ class EpsonFiscalDriver:
     def _write( self, s ):
         if isinstance(s, str):
             s = s.encode("latin1")
-        debug( "_write", ", ".join( [ "%x" % (ord(c) if type(c) == 'str' else c) for c in s ] ) )
+        debug( "_write", ", ".join( [ "%x" % (ord(c) if isinstance(c, str) else c) for c in s ] ) )
         print('WRITING S TO PRINTER ------->', s)
         self._serialPort.write( s )
 
     def _read( self, count ):
         ret = self._serialPort.read( count )
-        debug( "_read", ", ".join( [ "%x" % (ord(c) if type(c) == 'str' else c) for c in ret ] ) )
+        debug( "_read", ", ".join( [ "%x" % (ord(c) if isinstance(c, str) else c) for c in ret ] ) )
         print('READING ret FROM PRINTER ------->', ret)
-        print("_read", ", ".join( [ "%x" % (ord(c) if type(c) == 'str' else c) for c in ret ] ))
+        print("_read", ", ".join( [ "%x" % (ord(c) if isinstance(c, str) else c) for c in ret ] ))
         return ret
 
     def __del__( self ):
