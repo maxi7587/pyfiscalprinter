@@ -252,6 +252,7 @@ class EpsonFiscalDriver:
         checkSumHexa = ("0000" + hex(checkSum)[2:])[-4:].upper()
         debug( "checkSumHexa", checkSumHexa )
         debug( "bcc", bcc )
+        debug( "bcc.upper", bcc.upper() )
         return checkSumHexa == bcc.upper()
 
 class HasarFiscalDriver( EpsonFiscalDriver ):
