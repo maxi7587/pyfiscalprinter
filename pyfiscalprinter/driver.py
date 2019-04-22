@@ -171,6 +171,9 @@ class EpsonFiscalDriver:
                 timeout += self.WAIT_TIME
                 continue
             if ord(c) == 0x15: # NAK
+                print('-----------------------------------------')
+                print('ord(c) == 0x15')
+                print('-----------------------------------------')
                 if retries > self.RETRIES:
                     raise ComunicationError("Falló el envío del comando a la impresora luego de varios reintentos")
                 # Reenvío el mensaje
@@ -179,6 +182,9 @@ class EpsonFiscalDriver:
                 retries +=1
                 continue
             if c == chr(0x02):# STX - Comienzo de la respuesta
+                print('-----------------------------------------')
+                print('response start')
+                print('-----------------------------------------')
                 reply = c
                 noreplyCounter = 0
                 while c != chr(0x03): # ETX (Fin de texto)
