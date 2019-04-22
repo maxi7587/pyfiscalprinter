@@ -150,6 +150,9 @@ class EpsonFiscalDriver:
         timeout = time.time() + self.WAIT_TIME
         retries = 0
         while 1:
+            print('----------------------------')
+            print('INSIDE WHILE LOOP')
+            print('----------------------------')
             if time.time() > timeout:
                 print('-----------------------------------------')
                 print('should raise communication error')
