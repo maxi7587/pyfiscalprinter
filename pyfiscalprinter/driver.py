@@ -78,7 +78,8 @@ class EpsonFiscalDriver:
     def _write( self, s ):
         if isinstance(s, str):
             s = s.encode("latin1")
-        debug( "_write", ", ".join( [ "%x" % ord(c) for c in s ] ) )
+        debug( "_write", ", ".join( [ "%x" % ord(c) if type(c) == 'str' else c for c in s ] ) )
+        print('WRITING S TO PRINTER ------->', s)
         self._serialPort.write( s )
 
     def _read( self, count ):
