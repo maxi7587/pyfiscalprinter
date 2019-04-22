@@ -77,8 +77,10 @@ class EpsonFiscalDriver:
             self._sequenceNumber = 0x20
 
     def _write( self, s ):
+        print('S BEFORE ENCODE IN _write --------->', s)
         if isinstance(s, str):
             s = s.encode("latin1")
+        print('S AFTER ENCODE IN _write --------->', s)
         # debug( "_write", ", ".join( [ "%x" % (ord(c) if isinstance(c, str) else c) for c in s ] ) )
         debug( "_write", ", ".join( [ "%x" % c for c in s ] ) )
         print('WRITING S TO PRINTER ------->', s)
@@ -88,7 +90,6 @@ class EpsonFiscalDriver:
         ret = self._serialPort.read( count )
         debug( "_read", ", ".join( [ "%x" % c for c in ret ] ) )
         print('READING ret FROM PRINTER ------->', ret)
-        print("_read", ", ".join( [ "%x" % c for c in ret ] ))
         return ret
 
     def __del__( self ):
