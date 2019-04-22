@@ -198,6 +198,9 @@ class EpsonFiscalDriver:
                         raise ComunicationError("Fallo de comunicación, demasiados paquetes inválidos (bad bcc).")
                     continue
                 elif reply[1] != chr( self._sequenceNumber ): # Los número de seq no coinciden
+                    print('-----------------------------------------')
+                    print('seq number do not match, incrementing timeout')
+                    print('-----------------------------------------')
                     # Reenvío el mensaje
                     self._write( message )
                     timeout = time.time() + self.WAIT_TIME
