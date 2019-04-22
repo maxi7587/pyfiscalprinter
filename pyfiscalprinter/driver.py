@@ -13,7 +13,8 @@ def debugEnabled( *args ):
 def debugDisabled( *args ):
     pass
 
-debug = debugDisabled
+# debug = debugDisabled
+debug = debugEnabled
 
 class PrinterException(Exception):
     pass
