@@ -151,6 +151,9 @@ class EpsonFiscalDriver:
         retries = 0
         while 1:
             if time.time() > timeout:
+                print('-----------------------------------------')
+                print('should raise communication error')
+                print('-----------------------------------------')
                 raise ComunicationError("Expiró el tiempo de espera para una respuesta de la impresora. Revise la conexión.")
             c = self._read(1)
             print('C IN _sendMessage ------->', c)
@@ -158,6 +161,9 @@ class EpsonFiscalDriver:
             if len(c) == 0:
                 continue
             if ord(c) in (0x12, 0x14): # DC2 o DC4
+                print('-----------------------------------------')
+                print('incrementing timeout')
+                print('-----------------------------------------')
                 # incrementar timeout
                 timeout += self.WAIT_TIME
                 continue
