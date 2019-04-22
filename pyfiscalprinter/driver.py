@@ -182,7 +182,8 @@ class EpsonFiscalDriver:
                 timeout = time.time() + self.WAIT_TIME
                 retries +=1
                 continue
-            if ord(c) == chr(0x02):# STX - Comienzo de la respuesta
+            # if c == str(0x02):# STX - Comienzo de la respuesta
+            if ord(c) == 0x02:# STX - Comienzo de la respuesta
                 print('-----------------------------------------')
                 print('response start')
                 print('-----------------------------------------')
