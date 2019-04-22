@@ -223,6 +223,10 @@ class EpsonFiscalDriver:
                     if retries > self.RETRIES:
                         raise ComunicationError("Fallo de comunicación, demasiados paquetes inválidos (bad bcc).")
                     continue
+                print('seq number comparison --->', reply[1] != chr( self._sequenceNumber ))
+                print('reply[1] --->', reply[1])
+                print('chr( self._sequenceNumber) --->', chr( self._sequenceNumber))
+
                 elif reply[1] != chr( self._sequenceNumber ): # Los número de seq no coinciden
                     print('-----------------------------------------')
                     print('seq number do not match, incrementing timeout')
