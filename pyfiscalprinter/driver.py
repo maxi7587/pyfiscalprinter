@@ -214,6 +214,7 @@ class EpsonFiscalDriver:
                 print('--------------------------------------')
                 print('seq number comparison --->', reply[1] != chr( self._sequenceNumber ))
                 print('reply[1] --->', reply[1])
+                print('_sequenceNumber ------------->', self._sequenceNumber)
                 print('chr( self._sequenceNumber) --->', chr( self._sequenceNumber))
                 if not self._checkReplyBCC( reply, bcc ):
                     print('-----------------------------------------')
