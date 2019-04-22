@@ -125,6 +125,7 @@ class EpsonFiscalDriver:
 
     def _parseReply( self, reply, skipStatusErrors ):
         r = reply[4:-1] # Saco STX <Nro Seq> <Nro Comando> <Sep> ... ETX
+        print('_parseReply r', r)
         fields = r.split( chr(28) )
         printerStatus = fields[0]
         fiscalStatus = fields[1]
