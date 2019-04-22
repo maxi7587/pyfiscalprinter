@@ -252,8 +252,9 @@ class EpsonFiscalDriver:
         checkSumHexa = ("0000" + hex(checkSum)[2:])[-4:].upper()
         debug( "checkSumHexa", checkSumHexa )
         debug( "bcc", bcc )
-        debug( "bcc.upper", bcc.upper() )
-        return checkSumHexa == bcc.upper()
+        debug( "bcc.upper", bcc.upper().decode() )
+        # return checkSumHexa == bcc.upper()
+        return checkSumHexa == bcc.upper().decode()
 
 class HasarFiscalDriver( EpsonFiscalDriver ):
     fiscalStatusErrors = [(1<<0 + 1<<7, "Memoria Fiscal llena"),
