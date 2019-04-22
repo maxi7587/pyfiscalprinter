@@ -85,6 +85,8 @@ class EpsonFiscalDriver:
     def _read( self, count ):
         ret = self._serialPort.read( count )
         debug( "_read", ", ".join( [ "%x" % (ord(c) if type(c) == 'str' else c) for c in ret ] ) )
+        print('READING ret FROM PRINTER ------->', ret)
+        print("_read", ", ".join( [ "%x" % (ord(c) if type(c) == 'str' else c) for c in ret ] ))
         return ret
 
     def __del__( self ):
