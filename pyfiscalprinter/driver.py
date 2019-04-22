@@ -111,7 +111,9 @@ class EpsonFiscalDriver:
         print('message in sendCommand ------------>', message)
         if fields:
             message += chr(0x1c)
-        print('fields ---------->', fields)
+        for field in fields:
+            print('field ---------->', field)
+            print('field type ---------->', type(field))
         print('fields type ---------->', type(fields))
         print('message ---------->', message)
         print('message type ---------->', type(message))
