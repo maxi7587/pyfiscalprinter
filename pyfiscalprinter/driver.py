@@ -118,6 +118,7 @@ class EpsonFiscalDriver:
         checkSumHexa = ("0000" + hex(checkSum)[2:])[-4:].upper()
         message += checkSumHexa
         reply = self._sendMessage( message )
+        print('reply from _sendMessage ------------->', reply)
         self._incrementSequenceNumber()
         print('will return reply ------------->', reply)
         return self._parseReply( reply, skipStatusErrors )
