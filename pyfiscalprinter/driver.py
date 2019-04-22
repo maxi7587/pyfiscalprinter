@@ -114,6 +114,7 @@ class EpsonFiscalDriver:
         message += chr(0x1c).join( fields )
         message += chr(0x03)
         checkSum = sum( [ord(x) for x in message ] )
+        print('after checkSum')
         checkSumHexa = ("0000" + hex(checkSum)[2:])[-4:].upper()
         message += checkSumHexa
         reply = self._sendMessage( message )
@@ -298,6 +299,9 @@ class HasarFiscalDriver( EpsonFiscalDriver ):
                 return self._sendAndWaitAck( message, count + 1 )
 
     def _sendMessage( self, message ):
+        print('-----------------------------------------')
+        print('INSIDE _sendMessage')
+        print('-----------------------------------------')
         # Envía el mensaje
         # @return reply Respuesta (sin el checksum)
         self._sendAndWaitAck( message )
