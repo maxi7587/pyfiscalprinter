@@ -108,6 +108,7 @@ class EpsonFiscalDriver:
 
     def sendCommand( self, commandNumber, fields, skipStatusErrors = False ):
         message = chr(0x02) + chr( self._sequenceNumber ) + chr(commandNumber)
+        print('message in sendCommand ------------>', message)
         if fields:
             message += chr(0x1c)
         message += chr(0x1c).join( fields )
