@@ -252,7 +252,8 @@ class EpsonFiscalDriver:
         checkSumHexa = ("0000" + hex(checkSum)[2:])[-4:].upper()
         debug( "checkSumHexa", checkSumHexa )
         debug( "bcc", bcc )
-        debug( "bcc.upper", bcc.upper().decode() )
+        print('checksumHexa type', type(checkSumHexa))
+        debug( "bcc.upper.decode == checksumhexa", checkSumHexa == bcc.upper().decode() )
         # return checkSumHexa == bcc.upper()
         return checkSumHexa == bcc.upper().decode()
 
