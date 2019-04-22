@@ -158,6 +158,7 @@ class EpsonFiscalDriver:
             c = self._read(1)
             print('C IN _sendMessage ------->', c)
             print('ORD C IN _sendMessage ------->', ord(c))
+            print('ORD C TYPE IN _sendMessage ------->', type(ord(c)))
             if len(c) == 0:
                 print('-----------------------------------------')
                 print('len c == 0, CONTINUE')
