@@ -204,10 +204,10 @@ class PyFiscalPrinter(Object):
         pos_fiscal = self.pos_fiscal_map[int(tipo_responsable)]
         # mapear el numero de documento según RG1361
         # TODO: remove import and sys.exit()
-        print('controller before openTicket DOCTYPE------------>', int(tipo_doc)) # @WARNING: llega vacío???
+        doc_fiscal = self.doc_fiscal_map[int(tipo_doc)]
+        print('controller before openTicket DOCTYPE------------>', doc_fiscal) # @WARNING: llega vacío???
         import sys
         sys.exit()
-        doc_fiscal = self.doc_fiscal_map[int(tipo_doc)]
         # cancelar y volver a un estado conocido
         printer.cancelAnyDocument()
         # enviar texto de cabecera y pie de pagina:
