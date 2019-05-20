@@ -170,6 +170,11 @@ class EpsonPrinter(PrinterInterface):
 
     def _openBillCreditTicket(self, type, name, address, doc, docType, ivaType, isCreditNote,
             reference=None):
+        print('_openBillCreditTicket docType ------------>', doctype)
+        # TODO: remove import and sys.exit()
+        import sys
+        sys.exit()
+        # TODO: fix this line ---> the data type error is produced here!!!
         # if not doc or [x for x in doc or "" if x not in string.digits + "-."] or not \
         if not doc or [x for x in doc or "" if str(x) not in string.digits + "-."] or not \
                 docType in self.docTypeNames:
