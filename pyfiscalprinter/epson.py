@@ -170,8 +170,8 @@ class EpsonPrinter(PrinterInterface):
 
     def _openBillCreditTicket(self, type, name, address, doc, docType, ivaType, isCreditNote,
             reference=None):
-        print('_openBillCreditTicket docType ------------>', doctype)
         # TODO: remove import and sys.exit()
+        print('_openBillCreditTicket docType ------------>', docType)
         import sys
         sys.exit()
         # TODO: fix this line ---> the data type error is produced here!!!
