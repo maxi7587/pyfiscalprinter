@@ -185,7 +185,7 @@ class EpsonPrinter(PrinterInterface):
             print("---------not docType---------", docType)
             print(self.docTypeNames)
         print('filter ---> ', list(filter(lambda x: x not in string.digits + "-.", doc.decode('utf-8') or "")))
-        if filter(lambda x: x not in string.digits + "-.", doc.decode('utf-8') or ""):
+        if list(filter(lambda x: x not in string.digits + "-.", doc.decode('utf-8') or "")):
             print("---------filter...---------")
             for x in doc.decode('utf-8'):
                 print("---------str x...---------", x)
