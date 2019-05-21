@@ -175,7 +175,7 @@ class EpsonPrinter(PrinterInterface):
         # TODO: fix this line ---> the data type error is produced here!!!
         # if not doc or [x for x in doc or "" if x not in string.digits + "-."] or not \
 
-        # TODO: fixing... remove until next comment
+        # TODO: fixing... remove until next comment ERROR--->doc is bytes
         if not doc:
             print("---------not doc---------")
         if [x for x in doc or "" if str(x) not in string.digits + "-."]:
@@ -187,10 +187,9 @@ class EpsonPrinter(PrinterInterface):
         if filter(lambda x: x not in string.digits + "-.", str(doc) or ""):
             print("---------filter...---------")
             for x in doc:
-                print("---------type x...---------", x)
+                print("---------str x...---------", str(x))
                 print('x ----->', x)
                 print('x not in string.digits ----->', str(x) not in string.digits)
-            print("---------type doc...---------", type(doc) is str)
         import sys
         sys.exit()
         # REMOVE UNTIL HERE
