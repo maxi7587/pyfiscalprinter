@@ -204,7 +204,7 @@ class PyFiscalPrinter(Object):
         pos_fiscal = self.pos_fiscal_map[int(tipo_responsable)]
         # mapear el número de documento según RG1361
         # TODO: following line is just for testing, remove it and uncomment following
-        doc_fiscal = self.doc_fiscal_map[int(tipo_doc)]
+        doc_fiscal = int(tipo_doc)
         # doc_fiscal = self.doc_fiscal_map[int(tipo_doc)]
         print('controller before openTicket DOCTYPE------------>', doc_fiscal) # @WARNING: llega vacío???
         # cancelar y volver a un estado conocido
