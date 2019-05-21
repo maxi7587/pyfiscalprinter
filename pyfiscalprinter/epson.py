@@ -186,6 +186,7 @@ class EpsonPrinter(PrinterInterface):
             print(self.docTypeNames)
         if filter(lambda x: x not in string.digits + "-.", doc or ""):
             print("---------filter...---------")
+            print("lambda x: x not in string.digits + "-.", doc", lambda x: x not in string.digits + "-.", doc)
         import sys
         sys.exit()
         # REMOVE UNTIL HERE
