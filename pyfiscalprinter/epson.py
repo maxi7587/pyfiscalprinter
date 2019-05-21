@@ -199,8 +199,7 @@ class EpsonPrinter(PrinterInterface):
                 docType in self.docTypeNames:
             doc, docType = "", ""
         else:
-            doc = doc.replace("-", "")
-            doc = doc.replace(".", "")
+            doc = doc.replace(b'-', b'').replace(b'.', b'')
             docType = self.docTypeNames[docType]
         print('_openBillCreditTicket doc ------------>', doc) # @WARNING: llega vacío
         print('_openBillCreditTicket docType ------------>', docType) # @WARNING: llega vacío
