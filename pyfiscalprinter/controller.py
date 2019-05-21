@@ -203,9 +203,7 @@ class PyFiscalPrinter(Object):
         # mapear el tipo de cliente (posicion/categoria) según RG1785/04:
         pos_fiscal = self.pos_fiscal_map[int(tipo_responsable)]
         # mapear el número de documento según RG1361
-        # TODO: following line is just for testing, remove it and uncomment following
-        doc_fiscal = int(tipo_doc)
-        # doc_fiscal = self.doc_fiscal_map[int(tipo_doc)]
+        doc_fiscal = self.doc_fiscal_map[int(tipo_doc)]
         # cancelar y volver a un estado conocido
         printer.cancelAnyDocument()
         # enviar texto de cabecera y pie de pagina:
