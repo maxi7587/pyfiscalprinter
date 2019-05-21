@@ -212,6 +212,10 @@ class PyFiscalPrinter(Object):
         # enviar texto de cabecera y pie de pagina:
         printer.setHeader(self.header)
         printer.setTrailer(self.trailer)
+        print('cbte_fiscal -------->', cbte_fiscal)
+        # TODO: REMOVE 2 following lines!!!
+        import sys
+        sys.exit()
         # enviar los comandos de apertura de comprobante fiscal:
         if cbte_fiscal.startswith('T'):
             if letra_cbte:
