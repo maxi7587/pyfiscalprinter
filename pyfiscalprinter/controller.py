@@ -206,12 +206,12 @@ class PyFiscalPrinter(Object):
         # TODO: following line is just for testing, remove it and uncomment following
         doc_fiscal = int(tipo_doc)
         # doc_fiscal = self.doc_fiscal_map[int(tipo_doc)]
-        print('controller before openTicket DOCTYPE------------>', doc_fiscal) # @WARNING: llega vacío???
         # cancelar y volver a un estado conocido
         printer.cancelAnyDocument()
         # enviar texto de cabecera y pie de pagina:
         printer.setHeader(self.header)
         printer.setTrailer(self.trailer)
+        print('controller before openTicket DOCTYPE------------>', doc_fiscal) # @WARNING: llega vacío???
         print('cbte_fiscal -------->', cbte_fiscal)
         # TODO: REMOVE 2 following lines!!!
         import sys
