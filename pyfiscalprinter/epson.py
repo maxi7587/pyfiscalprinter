@@ -166,43 +166,17 @@ class EpsonPrinter(PrinterInterface):
         return self._openBillCreditTicket(type, name, address, doc, docType, ivaType, isCreditNote=True, reference=reference)
 
     def openBillTicket(self, type, name, address, doc, docType, ivaType):
-        print('_openBillCreditTicket doc ------------>', doc) # @WARNING: llega vacío
-        print('_openBillCreditTicket docType ------------>', docType) # @WARNING: llega vacío
         return self._openBillCreditTicket(type, name, address, doc, docType, ivaType, isCreditNote=False)
 
     def _openBillCreditTicket(self, type, name, address, doc, docType, ivaType, isCreditNote,
             reference=None):
-        # TODO: fix this line ---> the data type error is produced here!!!
         # if not doc or [x for x in doc or "" if x not in string.digits + "-."] or not \
-
-        # TODO: fixing... remove until next comment ERROR--->doc is bytes
-        if not doc:
-            print("---------not doc---------")
-        if [x for x in doc or "" if str(x) not in string.digits + "-."]:
-            print("---------x for x in doc---------", [x for x in doc])
-            print("str(x) not in string.digits + -. ???", string.digits + "-.")
-        if not docType in self.docTypeNames:
-            print("---------not docType---------", docType)
-            print(self.docTypeNames)
-        print('filter ---> ', list(filter(lambda x: x not in string.digits + "-.", doc.decode('utf-8') or "")))
-        if list(filter(lambda x: x not in string.digits + "-.", doc.decode('utf-8') or "")):
-            print("---------filter...---------")
-            for x in doc.decode('utf-8'):
-                print("---------str x...---------", x)
-                print('x ----->', x)
-                print('x not in string.digits ----->', x not in string.digits + "-.")
-        # import sys
-        # sys.exit()
-        # REMOVE UNTIL HERE
-
         if not doc or list(filter(lambda x: x not in string.digits + "-.", doc.decode('utf-8') or "")) or not \
                 docType in self.docTypeNames:
             doc, docType = "", ""
         else:
             doc = doc.replace(b'-', b'').replace(b'.', b'')
             docType = self.docTypeNames[docType]
-        print('_openBillCreditTicket doc ------------>', doc) # @WARNING: llega vacío
-        print('_openBillCreditTicket docType ------------>', docType) # @WARNING: llega vacío
         self._type = type
         # Remito primera linea - Es obligatorio si el cliente no es consumidor final
         if not reference:

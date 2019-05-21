@@ -209,9 +209,6 @@ class PyFiscalPrinter(Object):
         # enviar texto de cabecera y pie de pagina:
         printer.setHeader(self.header)
         printer.setTrailer(self.trailer)
-        print('nro_doc -------->', nro_doc)
-        print('controller before openTicket DOCTYPE------------>', doc_fiscal) # @WARNING: llega vacío???
-        print('cbte_fiscal -------->', cbte_fiscal)
         # enviar los comandos de apertura de comprobante fiscal:
         if cbte_fiscal.startswith('T'):
             if letra_cbte:
@@ -258,9 +255,13 @@ class PyFiscalPrinter(Object):
             importe = abs(importe)
         # si tiene cantidad es articulo normal, sino un descuento/recargo gral:
         if qty:
-            if factura['encabezado']['tipo_cbte'] in (91, 901):
+            # TODO: review---> changed by Maxi (factura to self.factura)
+            # if factura['encabezado']['tipo_cbte'] in (91, 901):
+            if self.factura['encabezado']['tipo_cbte'] in (91, 901):
                 self.printer.addRemitItem(ds, qty)
-            elif factura['encabezado']['tipo_cbte'] in (902, ):
+            # TODO: review---> changed by Maxi (factura to self.factura)
+            # elif factura['encabezado']['tipo_cbte'] in (902, ):
+            elif self.factura['encabezado']['tipo_cbte'] in (902, ):
                 self.printer.addReceiptDetail(ds, importe)
             else:
                 # self.printer.addItem(ds, qty, importe, alic_iva,
