@@ -174,6 +174,18 @@ class EpsonPrinter(PrinterInterface):
             reference=None):
         # TODO: fix this line ---> the data type error is produced here!!!
         # if not doc or [x for x in doc or "" if x not in string.digits + "-."] or not \
+
+        # TODO: fixing... remove until next comment
+        if not doc:
+            print("---------not doc---------")
+        if [x for x in doc or "" if str(x) not in string.digits + "-."]:
+            print("---------x for x in doc---------")
+        if not docType in self.docTypeNames:
+            print("---------not docType---------")
+        import sys
+        sys.exit()
+        # REMOVE UNTIL HERE
+
         if not doc or [x for x in doc or "" if str(x) not in string.digits + "-."] or not \
                 docType in self.docTypeNames:
             doc, docType = "", ""
@@ -182,8 +194,6 @@ class EpsonPrinter(PrinterInterface):
             docType = self.docTypeNames[docType]
         print('_openBillCreditTicket doc ------------>', doc) # @WARNING: llega vacío
         print('_openBillCreditTicket docType ------------>', docType) # @WARNING: llega vacío
-        import sys
-        sys.exit()
         self._type = type
         # Remito primera linea - Es obligatorio si el cliente no es consumidor final
         if not reference:
