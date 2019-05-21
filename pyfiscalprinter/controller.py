@@ -202,12 +202,11 @@ class PyFiscalPrinter(Object):
         letra_cbte = cbte_fiscal[-1] if len(cbte_fiscal) > 1 else None
         # mapear el tipo de cliente (posicion/categoria) según RG1785/04:
         pos_fiscal = self.pos_fiscal_map[int(tipo_responsable)]
-        # mapear el numero de documento según RG1361
-        # TODO: remove import and sys.exit()
+        # mapear el número de documento según RG1361
+        # TODO: following line is just for testing, remove it and uncomment following
         doc_fiscal = self.doc_fiscal_map[int(tipo_doc)]
+        # doc_fiscal = self.doc_fiscal_map[int(tipo_doc)]
         print('controller before openTicket DOCTYPE------------>', doc_fiscal) # @WARNING: llega vacío???
-        import sys
-        sys.exit()
         # cancelar y volver a un estado conocido
         printer.cancelAnyDocument()
         # enviar texto de cabecera y pie de pagina:
