@@ -214,8 +214,6 @@ class PyFiscalPrinter(Object):
         print('nro_doc -------->', nro_doc)
         print('controller before openTicket DOCTYPE------------>', doc_fiscal) # @WARNING: llega vacío???
         print('cbte_fiscal -------->', cbte_fiscal)
-        import sys
-        sys.exit()
         # enviar los comandos de apertura de comprobante fiscal:
         if cbte_fiscal.startswith('T'):
             if letra_cbte:

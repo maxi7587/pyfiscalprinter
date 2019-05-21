@@ -174,6 +174,8 @@ class EpsonPrinter(PrinterInterface):
             reference=None):
         print('_openBillCreditTicket doc ------------>', doc) # @WARNING: llega vacío
         print('_openBillCreditTicket docType ------------>', docType) # @WARNING: llega vacío
+        import sys
+        sys.exit()
         # TODO: fix this line ---> the data type error is produced here!!!
         # if not doc or [x for x in doc or "" if x not in string.digits + "-."] or not \
         if not doc or [x for x in doc or "" if str(x) not in string.digits + "-."] or not \
